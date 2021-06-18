@@ -1,0 +1,39 @@
+    var email = document.getElementById("email")//fdsf2@ffd.com
+    var password = document.getElementById("password")
+    var error = document.getElementById("error")
+    var success = document.getElementById("success")
+    
+    function onSingup() {
+        success.innerHTML = ""
+        error.innerHTML = ""
+    
+        // check email and password 
+        if (!email.value || !password.value) {
+            return;
+        }
+    
+        var users = JSON.parse(localStorage.getItem("users")) || [];
+       console.log(users)
+        var isEamilExist = false; // flag
+        for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            if (user.email === email.value) {
+                isEamilExist = true;
+            }
+        }
+    
+        if (isEamilExist) {
+            error.innerHTML = email.value + " Already exist";
+        } else {
+            users.push({
+                email: email.value,
+                password: password.value,
+            });
+            localStorage.setItem("users", JSON.stringify(users));
+            success.innerHTML = "Account create successfully"
+        }
+    }
+    
+    function onSignin() {
+    
+    }
